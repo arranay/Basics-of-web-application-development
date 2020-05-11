@@ -1,7 +1,10 @@
-FROM php:7.4.3-fpm-alpine
+FROM php:7.4.5-fpm
 
-RUN docker-php-ext-install pdo
-RUN docker-php-ext-install mysqli pdo_mysql
+RUN apt-get update \
+&& docker-php-ext-install pdo mysqli pdo_mysql && \
+pecl install -o -f redis \
+&& rm -rf /tmp/pear \
+&& docker-php-ext-enable redis
 
 WORKDIR /var/www
 

@@ -21,6 +21,7 @@ services:
      - 9000:9000
    depends_on:
      - db
+     - redis
 
  db:
    image: mysql:5.7.22
@@ -30,4 +31,9 @@ services:
      MYSQL_DATABASE: lab_laravel
      MYSQL_ROOT_PASSWORD: root 
    
-  
+ redis:
+  image: redis:4.0
+  ports: 
+    - 6379:6379
+
+

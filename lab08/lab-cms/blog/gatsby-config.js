@@ -18,7 +18,9 @@ module.exports = {
       options: {
         apiURL: `http://localhost:1337`,
         contentTypes: [
-          `posts`
+          `posts`,
+          `authors`,
+          `categories`
         ],
         queryLimit: 1000,
       },

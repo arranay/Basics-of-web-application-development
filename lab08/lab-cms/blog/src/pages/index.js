@@ -5,18 +5,22 @@ import Layout from "../components/layout"
 const IndexPage = ({ data }) => ( 
   <Layout> 
   <div>
-    <p>Лабораторная работа №8.</p>
-    <p>Основы разработки с Headless CMS.</p>
+    <p>
+      <h3>Лабораторная работа №8.</h3>
+      <h3>Основы разработки с Headless CMS.</h3>
+    </p>
     <ul>
       {data.allStrapiPosts.edges.map(document => (
         <li key={document.node.id}>
-          <h2><font color="#3AC1EF">
-            <Link to={`/${document.node.id}`}>{document.node.tittle}</Link>
-          </font></h2>
+          <font color="yellowgreen">
+            <h4><Link to={`/${document.node.id}`}>{document.node.tittle}</Link></h4>
+            <h4>Автор: {document.node.author.login}</h4>
+            <h4>Категория: {document.node.category.categoryName}</h4>
+          </font>
+          <p>{document.node.description}</p>
         </li>
       ))}
     </ul>
-    <Link to="/page-2/">Go to page 2</Link>
   </div>
   </Layout>
 )
@@ -28,6 +32,15 @@ export const pageQuery = graphql`
         node {
           id
           tittle
+          description
+          author{
+            id
+            login
+          }
+          category{
+            id
+            categoryName
+          }
         }
       }
     }

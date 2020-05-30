@@ -22,6 +22,9 @@
     "category": {
       "model": "category",
       "via": "posts"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

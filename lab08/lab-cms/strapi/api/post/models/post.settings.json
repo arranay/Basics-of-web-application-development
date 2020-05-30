@@ -11,6 +11,17 @@
   "attributes": {
     "tittle": {
       "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "author": {
+      "model": "author",
+      "via": "posts"
+    },
+    "category": {
+      "model": "category",
+      "via": "posts"
     }
   }
 }

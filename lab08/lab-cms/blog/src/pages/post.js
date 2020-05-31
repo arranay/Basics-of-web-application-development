@@ -14,7 +14,7 @@ const PostTemplate = ({ data }) => (
 export default PostTemplate
 
 export const query = graphql`
-  query PostTemplate($id: String!) {
+  query PostTemplate($id: String) {
     strapiPosts(id: {eq: $id}) {
       tittle
       content

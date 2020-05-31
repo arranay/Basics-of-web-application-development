@@ -23,7 +23,7 @@ const AuthorTemplate = ({ data }) => (
 export default AuthorTemplate
 
 export const query = graphql`
-  query AuthorTemplate($id: String!) {
+  query AuthorTemplate($id: String) {
     strapiAuthors(id: { eq: $id }) {
       id
       login

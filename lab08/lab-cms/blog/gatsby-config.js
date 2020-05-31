@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `My Superblog`,
-    description: `Gatsby blog with Strapi as a headless CMS`,
+    title: `blog`,
+    description: ``,
     author: `@gatsbyjs & @strapi`,
   },
   plugins: [

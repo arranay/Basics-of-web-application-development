@@ -23,7 +23,7 @@ const CategoryTemplate = ({ data }) => (
 export default CategoryTemplate 
 
 export const query = graphql`
-  query CategoryTemplate ($id: String!) {
+  query CategoryTemplate ($id: String) {
     strapiCategories(id: { eq: $id }) {
       id
       categoryName

@@ -1,6 +1,5 @@
 const path = require(`path`);
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {  
-  // Запрос для получения данных, используемых при создании страниц.
   resolve(
     graphql(request).then(result => {
       if (result.errors) {
@@ -10,10 +9,10 @@ const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
     })
   )
 });
-// Реализация функции Gatsby API "createPages". Она вызывается один раз когда 
-// уровень данных готовится к работе для того, чтобы позволить плагину создать из этих данных страницы
+
 exports.createPages = ({ boundActionCreators, graphql }) => {  
   const { createPage } = boundActionCreators;
+
   const getPosts = makeRequest(graphql, `
     {
       allStrapiPosts {
@@ -25,7 +24,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       }
     }
     `).then(result => {
-    // Создаём страницы для каждой статьи
     result.data.allStrapiPosts.edges.forEach(({ node }) => {
       createPage({
         path: `/${node.id}`,
@@ -36,6 +34,32 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       })
     })
   });
-  // Запрашиваем материалы статей для использования при создании страниц.
-  return getPosts;
+
+  const getAuthors = makeRequest(graphql, `
+    {
+      allStrapiAuthors {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    result.data.allStrapiAuthors.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/pages/author.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+
+return Promise.all([
+    getPosts,
+    getAuthors
+  ])
 };
+
